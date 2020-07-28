@@ -8,7 +8,7 @@ import CharDetails from '../charDetails';
 
 const App = () => {
     return (
-        <> 
+        <>
             <Container>
                 <Header />
             </Container>
