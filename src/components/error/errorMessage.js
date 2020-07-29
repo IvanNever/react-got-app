@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import img from './error.jpg'
+import img from './error-img.jpg'
 
 const ImgError = styled.img`
     width: 100%

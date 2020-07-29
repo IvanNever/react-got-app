@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import gotService from '../../services/gotService';
 import Spinner from '../spinner';
-import ErrorMessage from '../errorMessage';
+import ErrorMessage from '../error';
 
 const RandomCharBlock = styled.div`
     background-color: #fff;
@@ -17,17 +17,21 @@ const RandomCharHeader = styled.h4`
 
 export default class RandomChar extends Component {
 
-    constructor() {
-        super();
-        this.updateChar();
-    }
-
     gotService = new gotService();
 
     state = {
         char: {},
         loading: true,
         error: false
+    }
+
+    componentDidMount() {
+        this.updateChar();
+        this.timerId = setInterval(this.updateChar, 3000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerId);
     }
 
     onCharLoaded = (char) => {
@@ -44,8 +48,7 @@ export default class RandomChar extends Component {
         })
     }
 
-    updateChar() {
-        // const id = 213123213213123;
+    updateChar = () => {
         const id = Math.floor(Math.random()*140 + 25);
         this.gotService.getCharacter(id)
             .then(this.onCharLoaded)
@@ -53,7 +56,7 @@ export default class RandomChar extends Component {
     }
 
     render() {
-
+        console.log('render');
         const {char, loading, error} = this.state;
 
         const errorMesage = error ? <ErrorMessage/> : null;
