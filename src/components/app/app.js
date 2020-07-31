@@ -3,7 +3,7 @@ import {Col, Row, Container, Button} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
 import ErrorMessage from '../error';
-import CharacterPage from '../characterPage';
+import {CharacterPage, BooksPage, HousesPage, BooksItem} from '../pages';
 import ItemList from '../itemList';
 import ItemDetails from '../itemDetails';
 import gotService from '../../services/gotService';
@@ -61,28 +61,8 @@ export default class App extends Component {
                         </Col>
                     </Row>
                     <CharacterPage/>
-                    <Row>
-                        <Col md='6'>
-                            <ItemList
-                                onItemSelected={this.onItemSelected}
-                                getData={this.gotService.getAllBooks}
-                                renderItem={(item) => item.name}/>
-                        </Col>
-                        <Col md='6'>
-                            <ItemDetails charId={this.state.selectedChar}/>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md='6'>
-                            <ItemList
-                                onItemSelected={this.onItemSelected}
-                                getData={this.gotService.getAllHouses}
-                                renderItem={(item) => item.name}/>
-                        </Col>
-                        <Col md='6'>
-                            <ItemDetails charId={this.state.selectedChar}/>
-                        </Col>
-                    </Row>
+                    <BooksPage/>
+                    <HousesPage/>
                 </Container>
             </>
         );
